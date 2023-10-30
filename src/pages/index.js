@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
@@ -45,20 +46,12 @@ export default function Home() {
 
     useEffect(() => {
         setIsLoading(true);
-        if (inputValue == '') {
-            initList();
-        }
-        else { 
-            console.log(inputValue)
-            updateSearchResults(inputValue);
-            // console.log(memeResult)
-        }
+        initList();
         setIsLoading(false);
-        console.log(memeResult);
     }, [])
 
     return (
-        <main className={"flex h-screen w-screen flex-col items-center p-4 pt-10"}>
+        <main className={"flex h-screen w-screen flex-col items-center mt-10"}>
             <div className="flex p-4 items-center">
                 <div className="mr-4 text-xl">Search</div>
                 <input
@@ -66,14 +59,24 @@ export default function Home() {
                     value={inputValue}
                     className="rounded-full w-96 bg-white pl-5 pr-10 text-neutral-900 text-base py-2 font-normal outline-0"
                     onChange={(e) => {
-                        setInputValue(e.target.value);            
+                        setInputValue(e.target.value);
                     }}
                 />
-                <MagnifyingGlassIcon className="-ml-9 h-6 w-6 text-neutral-800 z-10" />
+                <MagnifyingGlassIcon 
+                    className="-ml-9 h-6 w-6 text-neutral-800 z-10 hover:cursor-pointer" 
+                    onClick={()=>{
+                        setIsLoading(true);
+                        updateSearchResults(inputValue);
+                        setIsLoading(false);
+                        console.log(memeResult)
+                    }
+                    }
+
+                />
             </div>
             <div className="flex flex-col p-4 items-center">
                 <div className="mr-4 text-xl">Result</div>
-                <div className="grid place-items-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
+                <div className="grid place-items-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 m-4">
                     {
                         isLoading == true ? (
                             <div class="animate-pulse flex items-center justify-center w-56 h-56 bg-neutral-700 hover:bg-neutral-600 rounded-md mb-2 p-4">

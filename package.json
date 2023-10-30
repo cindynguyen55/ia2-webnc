@@ -1,7 +1,7 @@
 {
   "name": "bai-tap-2",
   "version": "0.1.0",
-  "homepage": "https://cindynguyen55.github.io/picture-sreach/",
+  "homepage": "https://cindynguyen55.github.io/ia2-webnc/",
   "private": true,
   "scripts": {
     "dev": "next dev",
